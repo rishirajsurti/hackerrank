@@ -1,54 +1,32 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
 
-
-int SumContig(vector<int>);
-int SumNonContig(vector<int>);
-int max(int,int);
-
-int s_contig=0;
-int s_non_contig=0;
-
 int main(){
-	int t;
-	cin>>t;
-	int i,n,j,k;
-	vector<int> a;
-	for(i=0; i<t; i++){
-		cin>>n;
-		for(j=0; j<n; j++){
-			cin>>k;
-			a.push_back(k);
-		}
-		//cout<<SumContig(a)<<" "<<SumNonContig(a)<<endl;
-		s_contig=SumContig(a);
-		cout<<s_contig<<endl;
-		a.clear();
+	int t; scanf("%d", &t);
+	while(t--){
+		int n; scanf("%d", &n);
+		vector<int> a(n,0);
+		int i,j;
+		for(i=0; i<n; i++) scanf("%d", &a[i]);
+		int csum=0, ncsum=0, sum=0;
 
+		for(i=0; i<n; i++){
+			sum += a[i];
+			if(sum > csum) csum = sum;
+		}
+
+		vector<int> dp(n,0);
+		// dp[i] max sum ending at i;
+		for(i=0; i<n; i++){
+
+			for(j=0; j<i; j++){
+				dp[i] = max(dp[i], dp[i]+a[j]);
+				/*if(a[j]+dp[i] > dp[i])
+					dp[i] += a[j];*/
+			}
+		}
+		ncsum = *max_element(dp.begin(), dp.end());
+		printf("%d %d\n", csum, ncsum);
 	}
 	return 0;
-}
-
-int SumContig(vector<int> a){
-	
-	if(a.size()==1)
-		return a[0];
-	else{
-	vector<int>::const_iterator p1,p2,p3,p4;
-	p1 = a.begin();
-	p2 = a.end()-1;
-	p3 = a.begin()+1;
-	p4 = a.end();
-	vector<int> a1(p1,p2);
-	vector<int> a2(p3,p4);
-	vector<int> a3(p3,p2);
-	return max(*(a.begin())+SumContig(a1), *(a.end()-1) + SumContig(a2));
-
-	}
-		
-}
-int max(int a, int b){
-	return (a>b ? a:b);
 }

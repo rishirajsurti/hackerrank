@@ -1,0 +1,105 @@
+#include <cstdio>
+#include <algorithm>
+#include <vector>
+#include <stack>
+using namespace std;
+
+int n;
+vector<int> hist;
+
+/*int getArea(int l, int r){
+	if(l>r) return -100;
+	if(l==r) return a[l];
+	int curr_max;
+	curr_max = (*min_element(a.begin()+l, a.begin()+r))*(r-l+1);
+	return max(curr_max, max(getArea(l+1, r), getArea(l, r-1)));
+}
+*/
+
+/*int getArea(){
+	stack<int> s;
+	int max_area = 0;
+	int tp;
+	int area_with_top;
+
+	int i = 0;
+	while(i < n){
+		if(s.empty() || a[s.top()] <= a[i])
+			s.push(i++);
+		else {
+			tp = s.top();
+			s.pop();
+			area_with_top = a[tp] * (s.empty() ? i : i-s.top()+1);
+			max_area = max(max_area, area_with_top);
+		}
+	}
+
+	while(!s.empty()){
+		tp = s.top();
+		s.pop();
+		area_with_top = a[tp] * (s.empty() ? i : i - s.top() +1 );
+		max_area = max(max_area, area_with_top);
+	}
+
+	return max_area;
+}*/
+
+int getMaxArea()
+{
+    // Create an empty stack. The stack holds indexes of hist[] array
+    // The bars stored in stack are always in increasing order of their
+    // heights.
+    stack<int> s;
+ 
+    int max_area = 0; // Initalize max area
+    int tp;  // To store top of stack
+    int area_with_top; // To store area with top bar as the smallest bar
+ 
+    // Run through all bars of given histogram
+    int i = 0;
+    while (i < n)
+    {
+        // If this bar is higher than the bar on top stack, push it to stack
+        if (s.empty() || hist[s.top()] <= hist[i])
+            s.push(i++);
+ 
+        // If this bar is lower than top of stack, then calculate area of rectangle 
+        // with stack top as the smallest (or minimum height) bar. 'i' is 
+        // 'right index' for the top and element before top in stack is 'left index'
+        else
+        {
+            tp = s.top();  // store the top index
+            s.pop();  // pop the top
+ 
+            // Calculate the area with hist[tp] stack as smallest bar
+            area_with_top = hist[tp] * (s.empty() ? i : i - s.top() - 1);
+ 
+            // update max area, if needed
+            if (max_area < area_with_top)
+                max_area = area_with_top;
+        }
+    }
+ 
+    // Now pop the remaining bars from stack and calculate area with every
+    // popped bar as the smallest bar
+    while (s.empty() == false)
+    {
+        tp = s.top();
+        s.pop();
+        area_with_top = hist[tp] * (s.empty() ? i : i - s.top() - 1);
+ 
+        if (max_area < area_with_top)
+            max_area = area_with_top;
+    }
+ 
+    return max_area;
+}
+int main(){
+	int n; scanf("%d", &n);
+	hist.assign(n, 0);
+	for(int i = 0; i < n; scanf("%d", &hist[i++]));
+
+	int ans = getMaxArea();
+	printf("%d\n", ans);
+	return 0;
+}
