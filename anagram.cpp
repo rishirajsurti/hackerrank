@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+/*#include <bits/stdc++.h>
 using namespace std;
 
 int main(){
@@ -12,7 +12,7 @@ int main(){
 		if(sz%2!=0) printf("-1\n");
 		else{
 			s1 = s.substr(0, sz/2);
-			s2 = s.substr(sz/2);
+			s2 = s.substr(sz/2, s);
 //			cout<<s1<<" "<<s2<<endl;
 			map<char, int> ms2, ms1;
 			int i,j;
@@ -38,4 +38,4 @@ int main(){
 		
 	}	
 	return 0;
-}
+}*/

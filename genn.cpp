@@ -1,4 +1,13 @@
-#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+	map<int, int> m;
+	m[0] = 1;
+	cout<<m[1]<<endl;
+	return 0;
+}
+/*#include <iostream>
 #include <vector>
 #include <algorithm>
 using namespace std;
@@ -21,3 +30,4 @@ void print(vector<int> a){
 	for(i=0; i<a.size(); i++)
 		cout<<a[i]<<" ";
 }
+*/
