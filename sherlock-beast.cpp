@@ -4,6 +4,29 @@ using namespace std;
 int main(){
 	int t; scanf("%d", &t);
 	while(t--){
+		int n; scanf("%d", &n);
+		int y = n;
+		while(n%3 != 0) n -= 5;
+
+		if(n < 0) printf("-1");
+		else{
+			for(int i =0; i < n; i++)
+				printf("5");
+			for(int i = 0; i < (y-n); i++)
+				printf("3");
+		}
+		printf("\n");
+
+	}
+	return 0;
+}
+
+/*#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+	int t; scanf("%d", &t);
+	while(t--){
 
 		int n; scanf("%d", &n);
 		if(n==1 || n==2){ 
@@ -42,4 +65,4 @@ int main(){
 
 	}
 	return 0;
-}
+}*/
