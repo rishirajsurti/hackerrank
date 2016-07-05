@@ -7,17 +7,20 @@ class Main{
 		
 		BigInteger a = sc.nextBigInteger();
 		BigInteger b = sc.nextBigInteger();
-		BigInteger c = BigInteger.ZERO;
+		BigInteger c = new BigInteger("0");
 
 		int n = sc.nextInt();
 		for(int i = 3; i <= n; i++){
-			a = a.multiply(a);
-			c = a.add(b);
-			b = c;
-			a = b;
+			c = b;
+			b = b.multiply(b);
+			b = b.add(a);
+			a = c;
+
+		//	System.out.println(a+ " " + b+ " "+ c);
+
 		}
 
-		System.out.println(c);
+		System.out.println(b);
 		
 	}
 }

@@ -2,7 +2,7 @@
 using namespace std;
 
 typedef unsigned long long llu;
-llu dp[50];
+llu dp[100];
 
 int main(){
 	llu a, b, n;
